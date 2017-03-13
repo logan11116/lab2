@@ -40,6 +40,7 @@ namespace lab2
             }
 
             Console.ReadKey();
+            thread1.IsBackground = true;
         }
     }
 }
