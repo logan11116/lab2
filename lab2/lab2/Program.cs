@@ -68,9 +68,9 @@ public class Example
     public void T2()
     {
         _countdown.Wait();
+        _countdown3.Wait();
         Thread F = Thread.CurrentThread;
         Console.WriteLine(F.Name);
-        _countdown.Signal();
         _countdown2.Signal();
 
     }
