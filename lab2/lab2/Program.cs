@@ -1,46 +1,103 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
 
-namespace lab2
+
+public class Example
 {
-    class Program
+    // A semaphore that simulates a limited resource pool.
+    //
+    private static Semaphore _pool;
+
+    // A padding interval to make the output more orderly.
+    private static int _padding;
+
+
+    static CountdownEvent _countdown = new CountdownEvent(1);
+    static CountdownEvent _countdown2 = new CountdownEvent(1);
+    static CountdownEvent _countdown3 = new CountdownEvent(1);
+
+
+    public static void Main()
     {
-        static void F1()
-        {
-            while (true)
-            {
-                Console.WriteLine(new string(' ',10)+"Salut");
-            }
-        }
-         static void F2()
-        {
-            while(true)
-            {
-                ThreadStart F12 = new ThreadStart(F1);
-            Thread thread = new Thread(F1);
-            thread.Start();
-                Thread.Sleep(1000);
 
-            }
-        }
-        static void Main()
-        {
-            
-            ThreadStart F13 = new ThreadStart(F2);
-            Thread thread1 = new Thread(F2);
-            thread1.Start();
 
-            while (true)
-            {
-                Console.WriteLine("Roman");
-            }
 
-            Console.ReadKey();
-            thread1.IsBackground = true;
-        }
+        Example F1 = new Example();
+        Example F2 = new Example();
+        Example F3 = new Example();
+        Example F4 = new Example();
+        Example F5 = new Example();
+     
+
+        Thread tid1 = new Thread(new ThreadStart(F1.T1));
+        Thread tid2 = new Thread(new ThreadStart(F2.T2));
+        Thread tid3 = new Thread(new ThreadStart(F3.T3));
+        Thread tid4 = new Thread(new ThreadStart(F4.T4));
+        Thread tid5 = new Thread(new ThreadStart(F5.T5));
+
+        tid1.Name = "Thread 1";
+        tid2.Name = "Thread 2";
+        tid3.Name = "Thread 3";
+        tid4.Name = "Thread 4";
+        tid5.Name = "Thread 5";
+       
+
+        tid1.Start();
+        tid2.Start();
+        tid3.Start();
+        tid4.Start();
+        tid5.Start();
+
+
+        Console.ReadKey();
+
+
     }
+
+    public void T1()
+    {
+        Thread F = Thread.CurrentThread;
+        Console.WriteLine(F.Name);
+        _countdown.Signal();
+
+    }
+
+    public void T2()
+    {
+        _countdown.Wait();
+        Thread F = Thread.CurrentThread;
+        Console.WriteLine(F.Name);
+        _countdown.Signal();
+        _countdown2.Signal();
+
+    }
+
+    public void T3()
+        {
+        _countdown.Wait();
+        Thread F = Thread.CurrentThread;
+        Console.WriteLine(F.Name);
+        _countdown3.Signal();
+    }
+
+    public void T4()
+    {
+        _countdown2.Wait();
+        Thread F = Thread.CurrentThread;
+        Console.WriteLine(F.Name);
+       
+    }
+
+    public void T5()
+    {
+        _countdown2.Wait();
+        Thread F = Thread.CurrentThread;
+        Console.WriteLine(F.Name);
+        
+    }
+
+    
 }

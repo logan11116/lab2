@@ -1,0 +1,2 @@
+C:\Users\Roman-PC\OneDrive - Technical University of Moldova\simestru 2\PR\lab2\lab2\lab2sub\bin\Debug\lab2sub.exe.config
+C:\Users\Roman-PC\OneDrive - Technical University of Moldova\simestru 2\PR\lab2\lab2\lab2sub\obj\Debug\lab2sub.csprojResolveAssemblyReference.cache
